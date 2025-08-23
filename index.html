@@ -58,9 +58,9 @@
 </head>
 <body class="bg-stone-50 text-stone-800">
 
-    <div class="container mx-auto p-4 md:p-8 max-w-4xl min-h-screen flex items-center justify-center">
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl min-h-screen flex items-center justify-center flex-col">
 
-        <main class="w-full">
+        <main class="w-full max-w-2xl">
             <section id="progress" class="bg-white rounded-2xl shadow-xl relative">
                 <!-- Language Switcher -->
                 <div class="absolute top-4 right-4 flex space-x-2 z-10">
@@ -106,8 +106,9 @@
                 </div>
             </section>
         </main>
-
-        <footer class="text-center absolute bottom-4 w-full text-violet-700">
+        
+        <!-- Updated footer to be a part of the main container and closer to the card -->
+        <footer class="mt-8 w-full text-center text-violet-700">
             <p data-i18n="footer_message" class="text-sm md:text-base">"ผลบุญที่ท่านสร้างวันนี้ คือบ้านของท่านในอาคิเราะห์"</p>
         </footer>
     </div>
