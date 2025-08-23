@@ -3,225 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projek Nasikabu - Masjid Al-Hilaliyah</title>
+    <title>โครงการนาซิกาบู - มัสยิดอัลฮีลาลียะห์</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans Thai', sans-serif;
-            background: #E5E7EB; /* พื้นหลังสีเทาที่เข้มขึ้นเล็กน้อย */
+            /* Updated to a purple gradient */
+            background: linear-gradient(to bottom right, #f3e8ff, #e9d5ff);
         }
-        .card {
-            background-color: #FFFFFF; /* พื้นหลังการ์ดสีขาวที่สว่างและชัดเจน */
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05), 0 5px 10px rgba(0, 0, 0, 0.05);
+        /* Custom styles to match the card design */
+        .card-container {
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            position: relative;
+        }
+        .card-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
         }
         .chart-container {
             position: relative;
-            margin: auto;
-            height: 250px;
-            width: 250px;
+            width: 100%;
+            height: 100%;
         }
-        .chart-text {
+        .chart-text-overlay {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
-        .button-style {
-            transition: all 0.2s ease-in-out;
+        .gradient-text {
+            /* Updated to a purple gradient */
+            background: linear-gradient(to right, #7c3aed, #d8b4fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .button-style:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .copy-success-message {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-        .copy-success-message.show {
-            opacity: 1;
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
-<body class="bg-gray-200 text-gray-900">
+<body class="bg-stone-50 text-stone-800">
 
-    <div class="container mx-auto p-4 md:p-12 max-w-6xl">
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl min-h-screen flex items-center justify-center">
 
-        <!-- Header และปุ่มสลับภาษา -->
-        <header class="text-center mb-10 md:mb-16">
-            <!-- ปรับให้เป็น text-purple-950 เพื่อความชัดเจนสูงสุด -->
-            <h1 class="text-5xl md:text-6xl font-bold text-purple-950 drop-shadow-sm" data-i18n="project_title">โครงการนาซิกาบู</h1>
-            <!-- ปรับข้อความเป็นสีเทาที่เข้มขึ้น -->
-            <p class="text-xl md:text-2xl mt-2 text-gray-700 font-light" data-i18n="project_subtitle">รวมพลังศรัทธา สร้างมัสยิดอัลฮีลาลียะห์</p>
-            <div class="flex justify-center md:justify-end mt-6">
-                <!-- ปรับสีปุ่มให้สอดคล้องกับโทนสีที่เข้มขึ้น -->
-                <button onclick="setLanguage('th')" class="bg-purple-700 text-white font-semibold py-2 px-6 rounded-full button-style mr-2 hover:bg-purple-800">TH</button>
-                <button onclick="setLanguage('ms')" class="bg-gray-300 text-purple-900 font-semibold py-2 px-6 rounded-full button-style hover:bg-gray-400">MY</button>
-            </div>
-        </header>
-
-        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <!-- การ์ดสำหรับแสดงความคืบหน้า -->
-            <section id="progress-card" class="card p-6 md:p-8 col-span-1 lg:col-span-2 shadow-2xl">
-                <!-- ปรับหัวข้อเป็นสีม่วงเข้ม -->
-                <h2 class="text-3xl md:text-4xl font-bold text-purple-800 mb-6 text-center" data-i18n="progress_heading">ความคืบหน้ายอดบริจาค</h2>
-                <div class="flex flex-col md:flex-row items-center justify-center md:justify-around gap-8">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="chart-container">
-                            <canvas id="donationChart"></canvas>
-                            <div id="chartText" class="chart-text">
-                                <!-- ปรับเปอร์เซ็นต์เป็นสีม่วงเข้ม -->
-                                <span id="percentageText" class="text-5xl font-extrabold text-purple-950">...%</span>
-                                <!-- ปรับข้อความตัวเล็กเป็นสีเทาที่เข้มขึ้น -->
-                                <span class="block text-gray-600 text-lg mt-1" data-i18n="donation_label">ยอดบริจาค</span>
+        <main class="w-full">
+            <section id="progress" class="bg-white rounded-2xl shadow-xl relative">
+                <!-- Language Switcher -->
+                <div class="absolute top-4 right-4 flex space-x-2 z-10">
+                    <button onclick="setLanguage('th')" class="p-2 rounded-full hover:bg-stone-200 transition-colors duration-200" title="ภาษาไทย">
+                        🇹🇭
+                    </button>
+                    <button onclick="setLanguage('ms')" class="p-2 rounded-full hover:bg-stone-200 transition-colors duration-200" title="Bahasa Melayu">
+                        🇲🇾
+                    </button>
+                </div>
+                
+                <div class="card-container">
+                    <div class="card-content">
+                        <div class="w-full text-center">
+                            <h2 class="text-2xl md:text-3xl font-bold text-violet-950 mb-2" data-i18n="progress_heading">ความคืบหน้ายอดบริจาค</h2>
+                            <p class="text-sm md:text-base text-violet-700 mb-6" data-i18n="progress_description">ร่วมเป็นส่วนหนึ่งในการเติมเต็มเป้าหมาย 3,000,000 บาท เพื่อสร้างบ้านของอัลลอฮฺให้สำเร็จ</p>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row items-center justify-center w-full max-w-2xl space-y-8 md:space-y-0 md:space-x-8">
+                            <!-- Left Section: Chart -->
+                            <div class="w-2/3 md:w-1/2 flex items-center justify-center">
+                                <div class="chart-container relative h-48 w-48 md:h-64 md:w-64">
+                                    <canvas id="donationChart"></canvas>
+                                    <div class="chart-text-overlay">
+                                        <span id="percentageText" class="text-3xl md:text-5xl font-bold gradient-text">...%</span>
+                                        <span class="block text-sm md:text-base text-violet-700" data-i18n="donation_label">ยอดบริจาค</span>
+                                        <span id="currentTimeText" class="block text-xs text-violet-400 mt-1"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Section: Donation Info -->
+                            <div class="w-full md:w-1/2 text-center md:text-left">
+                                <p class="text-violet-700 text-lg">
+                                    <span data-i18n="latest_amount_label" class="font-bold text-violet-950">ยอดบริจาคล่าสุด: </span>
+                                    <span id="currentAmountText" class="text-lg font-bold text-amber-600">กำลังโหลด...</span>
+                                </p>
+                                <!-- The goal text is now a single element for easier translation -->
+                                <p class="text-violet-700" data-i18n="goal_from"></p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="text-center md:text-left">
-                        <!-- ปรับข้อความเป็นสีเทาที่เข้มขึ้น -->
-                        <p class="text-gray-700 mb-6 max-w-sm" data-i18n="progress_description">
-                            ร่วมเป็นส่วนหนึ่งในการเติมเต็มเป้าหมาย 3,000,000 บาท เพื่อสร้างบ้านของอัลลอฮฺให้สำเร็จ
-                        </p>
-                        <p class="font-bold text-2xl mb-2">
-                            <span data-i18n="latest_amount_label">ยอดบริจาคล่าสุด:</span> 
-                            <!-- คงสีทองไว้เพื่อเน้นเป็นพิเศษ -->
-                            <span id="currentAmountText" class="text-amber-500">กำลังโหลด...</span> บาท
-                        </p>
-                        <!-- ปรับข้อความเป็นสีเทาที่เข้มขึ้น -->
-                        <p class="text-gray-600 text-lg">
-                            <span data-i18n="goal_from">จากเป้าหมาย</span> 3,000,000 บาท
-                        </p>
-                        <!-- ปรับข้อความเป็นสีเทาที่เข้มขึ้น -->
-                        <p id="currentTimeText" class="text-sm text-gray-500 mt-4"></p>
-                    </div>
                 </div>
-            </section>
-
-            <!-- การ์ดสำหรับ QR Code -->
-            <section id="qr-card" class="card p-6 md:p-8 col-span-1 shadow-2xl text-center">
-                <!-- ปรับหัวข้อเป็นสีม่วงเข้ม -->
-                <h2 class="text-3xl font-bold text-purple-800 mb-6 whitespace-nowrap" data-i18n="qr_title">บริจาคด้วย QR Code</h2>
-                <img src="https://img2.pic.in.th/pic/qrpay.jpg" alt="QR Code for donation" class="w-2/3 md:w-1/2 lg:w-3/4 mx-auto rounded-xl shadow-md">
-                <!-- ปรับข้อความเป็นสีเทาที่เข้มขึ้น -->
-                <p class="text-gray-600 mt-4" data-i18n="qr_description">สแกนเพื่อบริจาคทันที</p>
             </section>
         </main>
-        
-        <!-- ส่วนช่องทางการบริจาคอื่นๆ -->
-        <section id="donate-channels" class="mt-8 card p-6 md:p-8 shadow-2xl">
-                <!-- ปรับหัวข้อเป็นสีม่วงเข้ม -->
-            <h2 class="text-3xl md:text-4xl font-bold text-purple-800 mb-8 text-center" data-i18n="donation_channels">ช่องทางการบริจาคอื่นๆ</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
-                <!-- การ์ดธนาคารอิสลาม -->
-                <div class="bg-gray-100 p-6 rounded-xl shadow-md button-style">
-                    <!-- ปรับข้อความให้เข้มขึ้น -->
-                    <h4 class="text-xl font-bold mb-2 text-purple-900" data-i18n="islamic_bank_title">ธนาคารอิสลามแห่งประเทศไทย</h4>
-                    <p id="islamicBankAcc" class="text-3xl font-mono tracking-wider mb-3 font-semibold text-purple-700">0901066346</p>
-                    <!-- ปรับข้อความให้เข้มขึ้น -->
-                    <p class="mb-4 text-gray-700">
-                        <span data-i18n="account_name_prefix">ชื่อบัญชี:</span>
-                        <span data-i18n="islamic_bank_account_name" class="font-bold text-purple-900">มัสยิดอัลฮีลาลียะห์</span>
-                    </p>
-                    <button onclick="copyToClipboard('islamicBankAcc')" class="bg-purple-700 text-white font-bold py-3 px-6 rounded-full hover:bg-purple-800 button-style" data-i18n="copy_button">คัดลอกเลขบัญชี</button>
-                </div>
-                <!-- การ์ด Maybank -->
-                <div class="bg-gray-100 p-6 rounded-xl shadow-md button-style">
-                    <!-- ปรับข้อความให้เข้มขึ้น -->
-                    <h4 class="text-xl font-bold mb-2 text-purple-900" data-i18n="maybank_title">Maybank</h4>
-                    <p id="maybankAcc" class="text-3xl font-mono tracking-wider mb-3 font-semibold text-purple-700">557139279538</p>
-                    <!-- ปรับข้อความให้เข้มขึ้น -->
-                    <p class="mb-4 text-gray-700">
-                        <span data-i18n="account_name_prefix">ชื่อบัญชี:</span>
-                        <span data-i18n="maybank_account_name" class="font-bold text-purple-900">Usman Sulong</span>
-                    </p>
-                    <button onclick="copyToClipboard('maybankAcc')" class="bg-purple-700 text-white font-bold py-3 px-6 rounded-full hover:bg-purple-800 button-style" data-i18n="copy_button">คัดลอกเลขบัญชี</button>
-                </div>
-            </div>
-            <!-- ปรับสีข้อความแสดงผลการคัดลอกให้ชัดเจนขึ้น -->
-            <div id="copy-feedback" class="text-center mt-6 h-6 text-purple-600 font-bold copy-success-message"></div>
-        </section>
 
-        <!-- ปรับข้อความท้ายหน้าให้เข้มขึ้น -->
-        <footer class="text-center mt-12 md:mt-20 text-gray-600">
-            <p data-i18n="footer_message">"ผลบุญที่ท่านสร้างวันนี้ คือบ้านของท่านในอาคิเราะห์"</p>
-            <p class="mt-2 text-sm">&copy; 2568 <span data-i18n="footer_project_name">โครงการมัสยิดอัลฮีลาลียะห์</span></p>
+        <footer class="text-center absolute bottom-4 w-full text-violet-700">
+            <p data-i18n="footer_message" class="text-sm md:text-base">"ผลบุญที่ท่านสร้างวันนี้ คือบ้านของท่านในอาคิเราะห์"</p>
         </footer>
     </div>
 
     <script>
-        // โค้ดทั้งหมดอยู่ในฟังก์ชันเดียวเพื่อจัดการการทำงาน
+        // Self-invoking function to encapsulate all the code
         (async function() {
             const donationGoal = 3000000;
             const currentTimeText = document.getElementById('currentTimeText');
-            const copyFeedbackEl = document.getElementById('copy-feedback');
             const percentageText = document.getElementById('percentageText');
             const currentAmountText = document.getElementById('currentAmountText');
             let currentLang = 'th';
             
-            // ข้อมูลสำหรับแปลภาษา
+            // Translation data, updated to include full goal text
             const translations = {
                 th: {
-                    project_title: 'โครงการนาซิกาบู',
-                    project_subtitle: 'รวมพลังศรัทธา สร้างมัสยิดอัลฮีลาลียะห์',
                     progress_heading: 'ความคืบหน้ายอดบริจาค',
                     progress_description: 'ร่วมเป็นส่วนหนึ่งในการเติมเต็มเป้าหมาย 3,000,000 บาท เพื่อสร้างบ้านของอัลลอฮฺให้สำเร็จ',
                     donation_label: 'ยอดบริจาค',
                     latest_amount_label: 'ยอดบริจาคล่าสุด:',
-                    goal_from: 'จากเป้าหมาย',
-                    qr_title: 'บริจาคด้วย QR Code',
-                    qr_description: 'สแกนเพื่อบริจาคทันที',
-                    donation_channels: 'ช่องทางการบริจาคอื่นๆ',
-                    islamic_bank_title: 'ธนาคารอิสลามแห่งประเทศไทย',
-                    maybank_title: 'Maybank',
-                    account_name_prefix: 'ชื่อบัญชี:',
-                    islamic_bank_account_name: 'มัสยิดอัลฮีลาลียะห์',
-                    maybank_account_name: 'Usman Sulong',
-                    copy_button: 'คัดลอกเลขบัญชี',
-                    copy_success: 'คัดลอกเลขบัญชีเรียบร้อยแล้ว!',
-                    footer_message: '"ผลบุญที่ท่านสร้างวันนี้ คือบ้านของท่านในอาคิเราะห์"',
-                    footer_project_name: 'โครงการมัสยิดอัลฮีลาลียะห์',
+                    goal_from: 'จากเป้าหมาย <span class="font-bold">3,000,000</span> บาท',
+                    footer_message: '\"ผลบุญที่ท่านสร้างวันนี้ คือบ้านของท่านในอาคิเราะห์\"',
                 },
                 ms: {
-                    project_title: 'Projek Nasikabu',
-                    project_subtitle: 'Bersatu Hati Membina Masjid Al-Hilaliyah',
                     progress_heading: 'Kemajuan Dana Sumbangan',
                     progress_description: 'Sertai kami dalam mencapai sasaran 3,000,000 Baht untuk menyelesaikan Rumah Allah.',
                     donation_label: 'Sumbangan',
                     latest_amount_label: 'Jumlah Sumbangan Terkini:',
-                    goal_from: 'Dari sasaran',
-                    qr_title: 'Sumbangan dengan Kod QR',
-                    qr_description: 'Imbas untuk menyumbang sekarang',
-                    donation_channels: 'Saluran Sumbangan Lain',
-                    islamic_bank_title: 'Bank Islam Thailand',
-                    maybank_title: 'Maybank',
-                    account_name_prefix: 'Nama Akaun:',
-                    islamic_bank_account_name: 'Masjid Al-Hilaliyah',
-                    maybank_account_name: 'Usman Sulong',
-                    copy_button: 'Salin Nombor Akaun',
-                    copy_success: 'Nombor akaun berjaya disalin!',
-                    footer_message: 'Pahala yang anda bina hari ini, adalah rumah anda di Akhirat.',
-                    footer_project_name: 'Projek Masjid Al-Hilaliyah',
+                    goal_from: 'Dari sasaran <span class="font-bold">3,000,000</span> Baht',
+                    footer_message: '\"Pahala yang anda bina hari ini, adalah rumah anda di Akhirat.\"'
                 }
             };
             
-            // สร้าง Doughnut Chart
+            // Create the Doughnut Chart
             const ctx = document.getElementById('donationChart').getContext('2d');
             const donationChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     datasets: [{
                         data: [0, donationGoal],
-                        /* เปลี่ยนสีในกราฟให้สอดคล้องกับธีมใหม่ */
-                        backgroundColor: ['#6d28d9', '#f5f5f4'],
+                        /* Updated chart colors for a purple theme */
+                        backgroundColor: ['#7c3aed', '#d1d5db'],
                         borderWidth: 0,
-                        borderRadius: 15,
+                        borderRadius: 10,
                     }]
                 },
                 options: {
@@ -238,63 +168,42 @@
                 }
             });
 
-            // ฟังก์ชันสำหรับอัปเดตข้อมูลบนหน้าเว็บ
+            // Function to update the chart and text
             function updateChart(amount) {
                 const percentage = Math.min(100, (amount / donationGoal) * 100);
                 
-                // อัปเดตกราฟ
                 donationChart.data.datasets[0].data[0] = amount;
                 donationChart.data.datasets[0].data[1] = Math.max(0, donationGoal - amount);
                 donationChart.update();
                 
-                // อัปเดตข้อความยอดบริจาค
                 percentageText.textContent = `${percentage.toFixed(1)}%`;
-                currentAmountText.textContent = amount.toLocaleString('th-TH');
+                currentAmountText.textContent = amount.toLocaleString('th-TH') + ' บาท';
             }
 
-            // ฟังก์ชันสำหรับเปลี่ยนภาษา
+            // Function to change language
             window.setLanguage = function(lang) {
                 currentLang = lang;
                 const elements = document.querySelectorAll('[data-i18n]');
                 elements.forEach(el => {
                     const key = el.getAttribute('data-i18n');
                     if (translations[lang][key]) {
-                        el.textContent = translations[lang][key];
+                        el.innerHTML = translations[lang][key]; // Use innerHTML to render the bolded number
                     }
                 });
-                updateClock(); // อัปเดตเวลาตามภาษาใหม่
+                updateClock();
             };
 
-            // ฟังก์ชันสำหรับอัปเดตเวลาปัจจุบัน
+            // Function to update the current time
             function updateClock() {
                 const now = new Date();
-                const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
                 let locale = (currentLang === 'ms') ? 'ms-MY' : 'th-TH';
                 const formattedTime = now.toLocaleDateString(locale, options);
                 currentTimeText.textContent = `${formattedTime}`;
             }
 
-            // ฟังก์ชันสำหรับคัดลอกเลขบัญชี
-            window.copyToClipboard = function(elementId) {
-                const textToCopy = document.getElementById(elementId).innerText;
-                const tempInput = document.createElement('input');
-                tempInput.value = textToCopy;
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                document.execCommand('copy');
-                document.body.removeChild(tempInput);
-
-                copyFeedbackEl.textContent = translations[currentLang].copy_success;
-                copyFeedbackEl.classList.remove('opacity-0');
-                copyFeedbackEl.classList.add('show');
-                setTimeout(() => {
-                    copyFeedbackEl.classList.remove('show');
-                }, 2000);
-            };
-
-            // ฟังก์ชันหลักสำหรับดึงข้อมูลจาก Google Sheet
+            // Main function to fetch data from Google Sheet
             async function fetchSheet() {
-                console.log('กำลังดึงข้อมูลจาก Google Sheet...');
                 const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdxUvZTFoCoJODdiGXDsofsY8Dfl27i59rtjyKhFeLw4U3viAqbWrVGvgn9HHu6dpT3ngUAzooaRnv/pub?gid=0&single=true&output=csv';
                 
                 try {
@@ -304,7 +213,6 @@
                     }
                     const csvText = await response.text();
                     
-                    // ดึงข้อมูลค่าตัวเลขล่าสุดจากแถวล่างสุดที่พบ
                     const rows = csvText.trim().split('\n').filter(row => row.trim());
                     let latestAmount = 0;
                     
@@ -313,29 +221,23 @@
                         const value = parseFloat(row.split(',')[0]);
                         if (!isNaN(value)) {
                             latestAmount = value;
-                            break;  
+                            break;
                         }
                     }
 
-                    // อัปเดตยอดบริจาคด้วยค่าล่าสุด
                     updateChart(latestAmount);
-                    console.log(`ดึงข้อมูลสำเร็จ! ยอดบริจาคล่าสุด: ${latestAmount.toLocaleString('th-TH')} บาท`);
 
                 } catch (error) {
-                    console.error('เกิดข้อผิดพลาดในการดึงข้อมูล:', error);
-                    // แสดง 0 เมื่อเกิดข้อผิดพลาด
+                    console.error('An error occurred while fetching data:', error);
                     updateChart(0);
                 }
             }
 
-            // เริ่มการทำงานเมื่อหน้าเว็บโหลดเสร็จ
+            // Start the application when the window loads
             window.onload = function() {
                 setLanguage('th');
-                // เรียก fetchSheet() ทันทีเพื่อดึงข้อมูลแรก
                 fetchSheet();
-                // ตั้งค่าให้อัปเดตเวลาทุกวินาที
                 setInterval(updateClock, 1000);
-                // ตั้งค่าให้อัปเดตข้อมูลทุกๆ 10 วินาที
                 setInterval(fetchSheet, 1000 * 10);
             }
         })();
