@@ -8,69 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600;700&family=Scheherazade:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --primary:#0B5C4B; /* สีเขียวมลยาม */
-      --accent:#F2C94C;  /* สีทอง */
-      --muted:#6B6B6B;
-      --bg:#F8FAFB;
-      --card:#FFFFFF;
-      font-family: 'Mitr', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#111}
-    header{background:linear-gradient(180deg,var(--primary),#0c7a66);color:white;padding:28px 16px}
-    .container{max-width:1100px;margin:0 auto;padding:0 16px}
-    .top{display:flex;align-items:center;gap:16px}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo .mark{width:64px;height:64px;border-radius:12px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-family:'Scheherazade', serif;font-size:28px}
-    h1{margin:0;font-size:20px}
-    p.lead{margin:6px 0 0;color:rgba(255,255,255,0.9)}
-
-    nav{margin-top:12px;display:flex;gap:12px;flex-wrap:wrap}
-    nav a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 10px;border-radius:8px}
-    nav a.cta{background:var(--accent);color:#111;font-weight:600}
-
-    main{padding:28px 0}
-    .hero{display:grid;grid-template-columns:1fr;gap:20px;align-items:center}
-    .hero-card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(12,20,30,0.06)}
-    .hero h2{margin:0 0 8px;font-size:24px}
-    .hero p{margin:0 0 12px;color:var(--muted)}
-    .actions{display:flex;gap:10px;flex-wrap:wrap}
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
-    .btn.primary{background:var(--primary);color:#fff}
-    .btn.ghost{border:1px solid var(--primary);color:var(--primary);background:transparent}
-
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(12,20,30,0.04)}
-    .small{font-size:14px;color:var(--muted)}
-
-    .prayer-times{display:flex;flex-direction:column;gap:8px}
-    .pt-row{display:flex;justify-content:space-between;padding:10px;border-radius:8px;background:linear-gradient(90deg,#fff,#f9fdfc)}
-
-    .events{display:flex;flex-direction:column;gap:12px}
-    .event{border-left:4px solid var(--primary);padding:10px 12px;border-radius:6px;background:#fff}
-
-    footer{margin-top:28px;padding:18px 0;color:var(--muted)}
-
-    /* responsive */
-    @media(min-width:900px){
-      .hero{grid-template-columns:1fr 420px}
-    }
-    @media(max-width:720px){
-      .grid{grid-template-columns:1fr}
-      nav{gap:8px}
-      .logo .mark{width:52px;height:52px}
-    }
-
-    /* gallery */
-    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .gallery img{width:100%;height:100px;object-fit:cover;border-radius:8px}
-    @media(max-width:720px){.gallery{grid-template-columns:repeat(2,1fr)}}
-
-    .map{width:100%;height:240px;border-radius:10px;overflow:hidden}
-    .contact-list{display:flex;flex-direction:column;gap:8px}
-    .contact-item{display:flex;gap:10px;align-items:flex-start}
-    .muted-small{font-size:13px;color:var(--muted)}
+    :root{--primary:#0B5C4B;--accent:#F2C94C;--muted:#6B6B6B;--bg:#F8FAFB;--card:#FFFFFF;font-family:'Mitr',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:#111}header{background:linear-gradient(180deg,var(--primary),#0c7a66);color:white;padding:28px 16px}.container{max-width:1100px;margin:0 auto;padding:0 16px}.top{display:flex;align-items:center;gap:16px}.logo{display:flex;align-items:center;gap:12px}.logo .mark{width:64px;height:64px;border-radius:12px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-family:'Scheherazade',serif;font-size:28px}h1{margin:0;font-size:20px}p.lead{margin:6px 0 0;color:rgba(255,255,255,0.9)}nav{margin-top:12px;display:flex;gap:12px;flex-wrap:wrap}nav a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 10px;border-radius:8px}nav a.cta{background:var(--accent);color:#111;font-weight:600}main{padding:28px 0}.hero{display:grid;grid-template-columns:1fr;gap:20px;align-items:center}.hero-card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(12,20,30,0.06)}.hero h2{margin:0 0 8px;font-size:24px}.hero p{margin:0 0 12px;color:var(--muted)}.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}.btn.primary{background:var(--primary);color:#fff}.btn.ghost{border:1px solid var(--primary);color:var(--primary);background:transparent}.grid{display:grid;grid-template-columns:1fr 360px;gap:20px}.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(12,20,30,0.04)}.small{font-size:14px;color:var(--muted)}.prayer-times{display:flex;flex-direction:column;gap:8px}.pt-row{display:flex;justify-content:space-between;padding:10px;border-radius:8px;background:linear-gradient(90deg,#fff,#f9fdfc)}.events{display:flex;flex-direction:column;gap:12px}.event{border-left:4px solid var(--primary);padding:10px 12px;border-radius:6px;background:#fff}footer{margin-top:28px;padding:18px 0;color:var(--muted)}@media(min-width:900px){.hero{grid-template-columns:1fr 420px}}@media(max-width:720px){.grid{grid-template-columns:1fr}nav{gap:8px}.logo .mark{width:52px;height:52px}}.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.gallery img{width:100%;height:100px;object-fit:cover;border-radius:8px}@media(max-width:720px){.gallery{grid-template-columns:repeat(2,1fr)}}.map{width:100%;height:240px;border-radius:10px;overflow:hidden}.contact-list{display:flex;flex-direction:column;gap:8px}.contact-item{display:flex;gap:10px;align-items:flex-start}.muted-small{font-size:13px;color:var(--muted)}.now{font-weight:700;color:var(--primary)}
   </style>
 </head>
 <body>
@@ -112,14 +51,13 @@
       </div>
 
       <aside class="hero-card">
-        <h3 id="prayer">เวลาอธิษฐาน (ตัวอย่าง)</h3>
-        <div class="prayer-times">
-          <div class="pt-row"><div>ฟัจรฺ (Fajr)</div><div>05:10</div></div>
-          <div class="pt-row"><div>ซุบฮฺ (Dhuhr)</div><div>12:10</div></div>
-          <div class="pt-row"><div>อัสริ (Asr)</div><div>15:30</div></div>
-          <div class="pt-row"><div>มัฆริบ (Maghrib)</div><div>18:05</div></div>
-          <div class="pt-row"><div>อิชา (Isha)</div><div>19:25</div></div>
-          <div style="font-size:13px;color:var(--muted);margin-top:8px">* เวลาตัวอย่าง — สามารถเชื่อมต่อ API เพื่อปรับตามพิกัดจริง</div>
+        <h3 id="prayer">เวลาอธิษฐาน (เรียลไทม์ — พิกัด นราธิวาส)</h3>
+        <div class="prayer-times" id="prayerTimes">
+          <!-- เวลาอธิษฐานจะถูกเติมโดยสคริปต์ -->
+        </div>
+        <div style="margin-top:8px;font-size:13px;color:var(--muted)">พิกัด: <span id="coords">6.4256 N, 101.8256 E</span> — โซนเวลา: <span id="tz">Asia/Bangkok (UTC+7)</span></div>
+        <div style="margin-top:8px">
+          <button class="btn ghost" id="useMyLocation">ใช้ตำแหน่งของฉันแทน</button>
         </div>
       </aside>
     </section>
@@ -129,14 +67,6 @@
         <div class="card" id="about">
           <h3>เกี่ยวกับมัสยิด</h3>
           <p class="small">มัสยิดอัลฮีลาลียะห์ เป็นศูนย์กลางของชุมชนบลูกาฮีเล ที่จัดพิธีละหมาด รายการเสวนา ตลอดจนกิจกรรมสังคมและการศึกษา เพื่อส่งเสริมความรู้และความสามัคคีของชุมชน</p>
-          <div style="margin-top:12px">
-            <h4>สิ่งอำนวยความสะดวก</h4>
-            <ul>
-              <li>ห้องละหมาดชาย/หญิง</li>
-              <li>ห้องเรียนสอนกุรอ่าน</li>
-              <li>ห้องประชุมและพื้นที่กิจกรรม</li>
-            </ul>
-          </div>
         </div>
 
         <div class="card" style="margin-top:12px" id="activities">
@@ -153,26 +83,13 @@
           </div>
         </div>
 
-        <div class="card" style="margin-top:12px" id="gallery">
-          <h3>แกลเลอรี</h3>
-          <div class="gallery">
-            <img src="https://placehold.co/600x400?text=แกลเลอรี+1" alt="gallery1">
-            <img src="https://placehold.co/600x400?text=แกลเลอรี+2" alt="gallery2">
-            <img src="https://placehold.co/600x400?text=แกลเลอรี+3" alt="gallery3">
-            <img src="https://placehold.co/600x400?text=แกลเลอรี+4" alt="gallery4">
-            <img src="https://placehold.co/600x400?text=แกลเลอรี+5" alt="gallery5">
-            <img src="https://placehold.co/600x400?text=แกลเลอรี+6" alt="gallery6">
-          </div>
-        </div>
-
       </div>
 
       <aside>
         <div class="card">
           <h4>แผนที่</h4>
           <div class="map">
-            <!-- แทนที่ iframe src ด้วยพิกัดจริงหรือลิงก์ Google Maps ของมัสยิด -->
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31617.123456789!2d101.0!3d6.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z4Liq4LiB4Lij4LmA4LiV4Lij4LmM!5e0!3m2!1sth!2sth!4v0000000000000" width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe id="gmap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31617.123456789!2d101.0!3d6.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z4Liq4LiB4Lij4LmA4LiV4Lij4LmM!5e0!3m2!1sth!2sth!4v0000000000000" width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
           </div>
 
           <div style="margin-top:12px">
@@ -194,5 +111,164 @@
           <div style="display:flex;gap:10px;align-items:center">
             <div style="width:64px;height:64px;background:#f1f1f1;border-radius:10px;display:flex;align-items:center;justify-content:center">รูป</div>
             <div>
-              <div style="font-weight:700">อิหม่าม อับดุล</div>
-              <div class="muted-small">คำปรึกษาทางศาสนา
+              <div style="font-weight:700">อิหม่าม Adnan Muhamaddawud</div>
+              <div class="muted-small">คำปรึกษาทางศาสนาและการสอนคุรอาน</div>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </section>
+
+    <footer class="container">
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700">มัสยิดอัลฮีลาลียะห์ บลูกาฮีเล</div>
+          <div class="muted-small">ตำบลบาตง อำเภอรือเสาะ จังหวัดนราธิวาส</div>
+        </div>
+        <div class="muted-small">สงวนลิขสิทธิ์ © 2025</div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    /* ---------------- PrayTimes (compact implementation) ----------------
+       Source: adapted from praytimes.org algorithm (public domain). This
+       implementation calculates Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha.
+       It accepts a timezone offset (hours) for the target location.
+    */
+    const PrayTimes = (function(){
+      // utility
+      function dtr(d){return (d*Math.PI)/180.0}
+      function rtd(r){return (r*180.0)/Math.PI}
+      function fixAngle(a){return a - 360.0 * (Math.floor(a/360.0))}
+      function sunPosition(jd){
+        const D = jd - 2451545.0;
+        const g = fixAngle(357.529 + 0.98560028 * D);
+        const q = fixAngle(280.459 + 0.98564736 * D);
+        const L = fixAngle(q + 1.915 * Math.sin(dtr(g)) + 0.020 * Math.sin(dtr(2*g)));
+        const e = 23.439 - 0.00000036 * D;
+        const RA = rtd(Math.atan2(Math.cos(dtr(e)) * Math.sin(dtr(L)), Math.cos(dtr(L))))/15.0; // in hours
+        const decl = rtd(Math.asin(Math.sin(dtr(e)) * Math.sin(dtr(L))));
+        const eqt = q/15.0 - RA;
+        return {decl:decl, eqt:eqt};
+      }
+      function julianDate(year,month,day){
+        if(month<=2){year-=1;month+=12}
+        const A = Math.floor(year/100);
+        const B = 2 - A + Math.floor(A/4);
+        const JD = Math.floor(365.25*(year+4716)) + Math.floor(30.6001*(month+1)) + day + B - 1524.5;
+        return JD;
+      }
+      function computeTimes(date, lat, lon, timezone){
+        const year = date.getUTCFullYear(), month = date.getUTCMonth()+1, day = date.getUTCDate();
+        const jd = julianDate(year,month,day);
+        const tnoon = 12 + timezone - (lon/15);
+        const sp = sunPosition(jd + tnoon/24.0);
+        const D = sp.decl; const EqT = sp.eqt;
+
+        function hourAngle(angle){
+          const term = (Math.cos(dtr(angle)) - Math.sin(dtr(lat))*Math.sin(dtr(D))) / (Math.cos(dtr(lat))*Math.cos(dtr(D)));
+          if(term<-1||term>1) return null;
+          return rtd(Math.acos(term))/15.0;
+        }
+
+        const dhuhr = 12 - EqT + timezone - (lon/15);
+        const fajrAngle = 18; // twilight angle default
+        const ishaAngle = 17; // common
+        const sunriseHA = hourAngle(90.833); // center of sun
+        const fajrHA = hourAngle(90 + fajrAngle);
+        const ishaHA = hourAngle(90 + ishaAngle);
+        const maghribHA = sunriseHA; // symmetric
+
+        const times = {};
+        times['Fajr'] = fajrHA===null?null: (dhuhr - fajrHA);
+        times['Sunrise'] = sunriseHA===null?null: (dhuhr - sunriseHA);
+        times['Dhuhr'] = dhuhr;
+        // Asr: use shadow length factor (Shafi'i -> factor = 1)
+        const asrFactor = 1; // for standard
+        const angleAsr = rtd(Math.atan(1/(asrFactor + Math.tan(Math.abs(dtr(lat - D))))));
+        const asrHA = hourAngle(90 + angleAsr);
+        times['Asr'] = asrHA===null?null:(dhuhr + asrHA);
+        times['Maghrib'] = maghribHA===null?null:(dhuhr + maghribHA);
+        times['Isha'] = ishaHA===null?null:(dhuhr + ishaHA);
+        return times;
+      }
+      function floatToTimeString(time){
+        if(time===null) return '--:--';
+        time = time % 24;
+        const h = Math.floor(time);
+        const m = Math.floor((time - h)*60 + 0.5);
+        return (h<10? '0'+h : h) + ':' + (m<10? '0'+m : m);
+      }
+      return {getTimes:function(date,lat,lon,timezone){return computeTimes(date,lat,lon,timezone);}, timeString:floatToTimeString};
+    })();
+
+    // Default: Narathiwat coordinates
+    let target = {lat:6.4256, lon:101.8256, tz:7}; // Asia/Bangkok UTC+7
+
+    function renderPrayerTimes(lat, lon, tz){
+      const nowUtc = new Date();
+      // We will compute for local date at target timezone: create date in UTC with same YMD as target local
+      // derive target local date by computing UTC date shifted by target tz
+      const utc = new Date(nowUtc.getTime());
+      // compute date components in target timezone
+      const localTime = new Date(nowUtc.getTime() + (tz - (nowUtc.getTimezoneOffset()/60))*3600*1000);
+      const dateForCalc = new Date(Date.UTC(localTime.getUTCFullYear(), localTime.getUTCMonth(), localTime.getUTCDate()));
+      const times = PrayTimes.getTimes(dateForCalc, lat, lon, tz);
+
+      const container = document.getElementById('prayerTimes');
+      container.innerHTML = '';
+      const order = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+      const names = {'Fajr':'ฟัจรฺ (Fajr)','Sunrise':'ขึ้นรังสีย์ (Sunrise)','Dhuhr':'ซุบฮฺ (Dhuhr)','Asr':'อัสริ (Asr)','Maghrib':'มัฆริบ (Maghrib)','Isha':'อิชา (Isha)'};
+      // find next prayer
+      let next = null;
+      const nowTargetH = (localTime.getUTCHours() + localTime.getUTCMinutes()/60);
+      // compute numeric times
+      const numeric = {};
+      for(const k of order){
+        numeric[k] = times[k];
+      }
+      for(const k of order){
+        if(numeric[k]!==null && numeric[k] > nowTargetH){ next = k; break; }
+      }
+      if(!next) next = 'Fajr'; // next day
+
+      for(const k of order){
+        const row = document.createElement('div'); row.className = 'pt-row';
+        const left = document.createElement('div'); left.textContent = names[k];
+        const right = document.createElement('div'); right.textContent = PrayTimes.timeString(numeric[k]);
+        if(k===next){ right.className = 'now' }
+        row.appendChild(left); row.appendChild(right);
+        container.appendChild(row);
+      }
+      // update coords display
+      document.getElementById('coords').textContent = lat.toFixed(4) + ' N, ' + lon.toFixed(4) + ' E';
+      document.getElementById('tz').textContent = 'Asia/Bangkok (UTC+'+tz+')';
+      // update map iframe to center on coords
+      const gmap = document.getElementById('gmap');
+      gmap.src = `https://www.google.com/maps/embed/v1/view?key=YOUR_GOOGLE_MAPS_EMBED_API_KEY&center=${lat},${lon}&zoom=15&maptype=roadmap`;
+    }
+
+    // initial render
+    renderPrayerTimes(target.lat, target.lon, target.tz);
+    // update every 60 seconds
+    setInterval(()=>renderPrayerTimes(target.lat, target.lon, target.tz),60*1000);
+
+    // allow user to use their own location
+    document.getElementById('useMyLocation').addEventListener('click', async ()=>{
+      if(!navigator.geolocation){alert('ไม่รองรับการขอพิกัดจากเบราว์เซอร์');return}
+      navigator.geolocation.getCurrentPosition(pos=>{
+        const lat = pos.coords.latitude; const lon = pos.coords.longitude;
+        // derive timezone offset in hours from browser for user's location (approx). Note: browser tz may differ from target location
+        const tzOffset = -new Date().getTimezoneOffset()/60;
+        target = {lat:lat, lon:lon, tz:tzOffset};
+        renderPrayerTimes(lat, lon, tzOffset);
+      },err=>{alert('ไม่สามารถรับตำแหน่งได้: '+err.message)});
+    });
+
+  </script>
+
+</body>
+</html>
