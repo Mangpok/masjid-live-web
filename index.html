@@ -1,247 +1,198 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โครงการนาซิกาบู - มัสยิดอัลฮีลาลียะห์</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans Thai', sans-serif;
-            /* Updated to a purple gradient */
-            background: linear-gradient(to bottom right, #f3e8ff, #e9d5ff);
-        }
-        /* Custom styles to match the card design */
-        .card-container {
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            position: relative;
-        }
-        .card-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        .chart-text-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-        .gradient-text {
-            /* Updated to a purple gradient */
-            background: linear-gradient(to right, #7c3aed, #d8b4fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>มัสยิดอัลฮีลาลียะห์ บลูกาฮีเล</title>
+  <meta name="description" content="มัสยิดอัลฮีลาลียะห์ บลูกาฮีเล - ตำบลบาตง อำเภอรือเสาะ จังหวัดนราธิวาส" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600;700&family=Scheherazade:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#0B5C4B; /* สีเขียวมลยาม */
+      --accent:#F2C94C;  /* สีทอง */
+      --muted:#6B6B6B;
+      --bg:#F8FAFB;
+      --card:#FFFFFF;
+      font-family: 'Mitr', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(180deg,var(--primary),#0c7a66);color:white;padding:28px 16px}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .top{display:flex;align-items:center;gap:16px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo .mark{width:64px;height:64px;border-radius:12px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-family:'Scheherazade', serif;font-size:28px}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:6px 0 0;color:rgba(255,255,255,0.9)}
+
+    nav{margin-top:12px;display:flex;gap:12px;flex-wrap:wrap}
+    nav a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 10px;border-radius:8px}
+    nav a.cta{background:var(--accent);color:#111;font-weight:600}
+
+    main{padding:28px 0}
+    .hero{display:grid;grid-template-columns:1fr;gap:20px;align-items:center}
+    .hero-card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(12,20,30,0.06)}
+    .hero h2{margin:0 0 8px;font-size:24px}
+    .hero p{margin:0 0 12px;color:var(--muted)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
+    .btn.primary{background:var(--primary);color:#fff}
+    .btn.ghost{border:1px solid var(--primary);color:var(--primary);background:transparent}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(12,20,30,0.04)}
+    .small{font-size:14px;color:var(--muted)}
+
+    .prayer-times{display:flex;flex-direction:column;gap:8px}
+    .pt-row{display:flex;justify-content:space-between;padding:10px;border-radius:8px;background:linear-gradient(90deg,#fff,#f9fdfc)}
+
+    .events{display:flex;flex-direction:column;gap:12px}
+    .event{border-left:4px solid var(--primary);padding:10px 12px;border-radius:6px;background:#fff}
+
+    footer{margin-top:28px;padding:18px 0;color:var(--muted)}
+
+    /* responsive */
+    @media(min-width:900px){
+      .hero{grid-template-columns:1fr 420px}
+    }
+    @media(max-width:720px){
+      .grid{grid-template-columns:1fr}
+      nav{gap:8px}
+      .logo .mark{width:52px;height:52px}
+    }
+
+    /* gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .gallery img{width:100%;height:100px;object-fit:cover;border-radius:8px}
+    @media(max-width:720px){.gallery{grid-template-columns:repeat(2,1fr)}}
+
+    .map{width:100%;height:240px;border-radius:10px;overflow:hidden}
+    .contact-list{display:flex;flex-direction:column;gap:8px}
+    .contact-item{display:flex;gap:10px;align-items:flex-start}
+    .muted-small{font-size:13px;color:var(--muted)}
+  </style>
 </head>
-<body class="bg-stone-50 text-stone-800">
-
-    <div class="container mx-auto p-4 md:p-8 max-w-4xl min-h-screen flex items-center justify-center flex-col">
-
-        <main class="w-full max-w-2xl">
-            <section id="progress" class="bg-white rounded-2xl shadow-xl relative">
-                <!-- Language Switcher -->
-                <div class="absolute top-4 right-4 flex space-x-2 z-10">
-                    <button onclick="setLanguage('th')" class="p-2 rounded-full hover:bg-stone-200 transition-colors duration-200" title="ภาษาไทย">
-                        🇹🇭
-                    </button>
-                    <button onclick="setLanguage('ms')" class="p-2 rounded-full hover:bg-stone-200 transition-colors duration-200" title="Bahasa Melayu">
-                        🇲🇾
-                    </button>
-                </div>
-                
-                <div class="card-container">
-                    <div class="card-content">
-                        <div class="w-full text-center">
-                            <h2 class="text-2xl md:text-3xl font-bold text-violet-950 mb-2" data-i18n="progress_heading">ความคืบหน้ายอดบริจาค</h2>
-                            <p class="text-sm md:text-base text-violet-700 mb-6" data-i18n="progress_description">ร่วมเป็นส่วนหนึ่งในการเติมเต็มเป้าหมาย 3,000,000 บาท เพื่อสร้างบ้านของอัลลอฮฺให้สำเร็จ</p>
-                        </div>
-                        
-                        <div class="flex flex-col md:flex-row items-center justify-center w-full max-w-2xl space-y-8 md:space-y-0 md:space-x-8">
-                            <!-- Left Section: Chart -->
-                            <div class="w-2/3 md:w-1/2 flex items-center justify-center">
-                                <div class="chart-container relative h-48 w-48 md:h-64 md:w-64">
-                                    <canvas id="donationChart"></canvas>
-                                    <div class="chart-text-overlay">
-                                        <span id="percentageText" class="text-3xl md:text-5xl font-bold gradient-text">...%</span>
-                                        <span class="block text-sm md:text-base text-violet-700" data-i18n="donation_label">ยอดบริจาค</span>
-                                        <span id="currentTimeText" class="block text-xs text-violet-400 mt-1"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Right Section: Donation Info -->
-                            <div class="w-full md:w-1/2 text-center md:text-left">
-                                <p class="text-violet-700 text-lg">
-                                    <span data-i18n="latest_amount_label" class="font-bold text-violet-950">ยอดบริจาคล่าสุด: </span>
-                                    <span id="currentAmountText" class="text-lg font-bold text-amber-600">กำลังโหลด...</span>
-                                </p>
-                                <!-- The goal text is now a single element for easier translation -->
-                                <p class="text-violet-700" data-i18n="goal_from"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-        
-        <!-- Updated footer to be a part of the main container and closer to the card -->
-        <footer class="mt-8 w-full text-center text-violet-700">
-            <p data-i18n="footer_message" class="text-sm md:text-base">"ผลบุญที่ท่านสร้างวันนี้ คือบ้านของท่านในอาคิเราะห์"</p>
-        </footer>
+<body>
+  <header>
+    <div class="container">
+      <div class="top">
+        <div class="logo">
+          <div class="mark">ﻩ</div>
+          <div>
+            <h1>มัสยิดอัลฮีลาลียะห์ บลูกาฮีเล</h1>
+            <p class="lead">ตำบลบาตง อำเภอรือเสาะ จังหวัดนราธิวาส</p>
+          </div>
+        </div>
+        <div style="margin-left:auto;">
+          <nav>
+            <a href="#about">เกี่ยวกับ</a>
+            <a href="#activities">กิจกรรม</a>
+            <a href="#gallery">แกลเลอรี</a>
+            <a href="#contact">ติดต่อ</a>
+            <a class="cta" href="#donate">บริจาค</a>
+          </nav>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <script>
-        // Self-invoking function to encapsulate all the code
-        (async function() {
-            const donationGoal = 3000000;
-            const currentTimeText = document.getElementById('currentTimeText');
-            const percentageText = document.getElementById('percentageText');
-            const currentAmountText = document.getElementById('currentAmountText');
-            let currentLang = 'th';
-            
-            // Translation data, updated to include full goal text
-            const translations = {
-                th: {
-                    progress_heading: 'ความคืบหน้ายอดบริจาค',
-                    progress_description: 'ร่วมเป็นส่วนหนึ่งในการเติมเต็มเป้าหมาย 3,000,000 บาท เพื่อสร้างบ้านของอัลลอฮฺให้สำเร็จ',
-                    donation_label: 'ยอดบริจาค',
-                    latest_amount_label: 'ยอดบริจาคล่าสุด:',
-                    goal_from: 'จากเป้าหมาย <span class="font-bold">3,000,000</span> บาท',
-                    footer_message: '\"ผลบุญที่ท่านสร้างวันนี้ คือบ้านของท่านในอาคิเราะห์\"',
-                },
-                ms: {
-                    progress_heading: 'Kemajuan Dana Sumbangan',
-                    progress_description: 'Sertai kami dalam mencapai sasaran 3,000,000 Baht untuk menyelesaikan Rumah Allah.',
-                    donation_label: 'Sumbangan',
-                    latest_amount_label: 'Jumlah Sumbangan Terkini:',
-                    goal_from: 'Dari sasaran <span class="font-bold">3,000,000</span> Baht',
-                    footer_message: '\"Pahala yang anda bina hari ini, adalah rumah anda di Akhirat.\"'
-                }
-            };
-            
-            // Create the Doughnut Chart
-            const ctx = document.getElementById('donationChart').getContext('2d');
-            const donationChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: [0, donationGoal],
-                        /* Updated chart colors for a purple theme */
-                        backgroundColor: ['#7c3aed', '#d1d5db'],
-                        borderWidth: 0,
-                        borderRadius: 10,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '80%',
-                    plugins: {
-                        tooltip: { enabled: false }
-                    },
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true
-                    }
-                }
-            });
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <h2>ยินดีต้อนรับสู่ มัสยิดอัลฮีลาลียะห์</h2>
+        <p>มัสยิดของชุมชนบลูกาฮีเล เปิดให้การละหมาด คำสอน และกิจกรรมชุมชนทุกเพศทุกวัย เราต้อนรับทุกท่านด้วยความอบอุ่นและเคารพ</p>
+        <div class="actions">
+          <a class="btn primary" href="#prayer">เวลาอธิษฐาน</a>
+          <a class="btn ghost" href="#activities">กิจกรรม</a>
+          <a class="btn ghost" href="#contact">แผนที่/ติดต่อ</a>
+        </div>
+        <hr style="margin:14px 0;border:none;border-top:1px dashed #eee">
+        <div class="small">ศูนย์ชุมชน: การบรรยาย, ค่ายเยาวชน, งานศาสนา และการกุศล</div>
+      </div>
 
-            // Function to update the chart and text
-            function updateChart(amount) {
-                const percentage = Math.min(100, (amount / donationGoal) * 100);
-                
-                donationChart.data.datasets[0].data[0] = amount;
-                donationChart.data.datasets[0].data[1] = Math.max(0, donationGoal - amount);
-                donationChart.update();
-                
-                percentageText.textContent = `${percentage.toFixed(1)}%`;
-                currentAmountText.textContent = amount.toLocaleString('th-TH') + ' บาท';
-            }
+      <aside class="hero-card">
+        <h3 id="prayer">เวลาอธิษฐาน (ตัวอย่าง)</h3>
+        <div class="prayer-times">
+          <div class="pt-row"><div>ฟัจรฺ (Fajr)</div><div>05:10</div></div>
+          <div class="pt-row"><div>ซุบฮฺ (Dhuhr)</div><div>12:10</div></div>
+          <div class="pt-row"><div>อัสริ (Asr)</div><div>15:30</div></div>
+          <div class="pt-row"><div>มัฆริบ (Maghrib)</div><div>18:05</div></div>
+          <div class="pt-row"><div>อิชา (Isha)</div><div>19:25</div></div>
+          <div style="font-size:13px;color:var(--muted);margin-top:8px">* เวลาตัวอย่าง — สามารถเชื่อมต่อ API เพื่อปรับตามพิกัดจริง</div>
+        </div>
+      </aside>
+    </section>
 
-            // Function to change language
-            window.setLanguage = function(lang) {
-                currentLang = lang;
-                const elements = document.querySelectorAll('[data-i18n]');
-                elements.forEach(el => {
-                    const key = el.getAttribute('data-i18n');
-                    if (translations[lang][key]) {
-                        el.innerHTML = translations[lang][key]; // Use innerHTML to render the bolded number
-                    }
-                });
-                updateClock();
-            };
+    <section style="margin-top:20px" class="grid">
+      <div>
+        <div class="card" id="about">
+          <h3>เกี่ยวกับมัสยิด</h3>
+          <p class="small">มัสยิดอัลฮีลาลียะห์ เป็นศูนย์กลางของชุมชนบลูกาฮีเล ที่จัดพิธีละหมาด รายการเสวนา ตลอดจนกิจกรรมสังคมและการศึกษา เพื่อส่งเสริมความรู้และความสามัคคีของชุมชน</p>
+          <div style="margin-top:12px">
+            <h4>สิ่งอำนวยความสะดวก</h4>
+            <ul>
+              <li>ห้องละหมาดชาย/หญิง</li>
+              <li>ห้องเรียนสอนกุรอ่าน</li>
+              <li>ห้องประชุมและพื้นที่กิจกรรม</li>
+            </ul>
+          </div>
+        </div>
 
-            // Function to update the current time
-            function updateClock() {
-                const now = new Date();
-                const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-                let locale = (currentLang === 'ms') ? 'ms-MY' : 'th-TH';
-                const formattedTime = now.toLocaleDateString(locale, options);
-                currentTimeText.textContent = `${formattedTime}`;
-            }
+        <div class="card" style="margin-top:12px" id="activities">
+          <h3>กิจกรรมที่กำลังจะมา</h3>
+          <div class="events">
+            <div class="event">
+              <strong>บูรณะมัสยิด</strong>
+              <div class="muted-small">วันที่: 5 ตุลาคม 2025 — ร่วมแรงร่วมใจปรับปรุงหลังคาและสีผนัง</div>
+            </div>
+            <div class="event">
+              <strong>ค่ายเยาวชนฤดูร้อน</strong>
+              <div class="muted-small">วันที่: 20-22 ธันวาคม 2025 — ค่ายอบรมคุณธรรมและคุรอาน</div>
+            </div>
+          </div>
+        </div>
 
-            // Main function to fetch data from Google Sheet
-            async function fetchSheet() {
-                const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdxUvZTFoCoJODdiGXDsofsY8Dfl27i59rtjyKhFeLw4U3viAqbWrVGvgn9HHu6dpT3ngUAzooaRnv/pub?gid=0&single=true&output=csv';
-                
-                try {
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    const csvText = await response.text();
-                    
-                    const rows = csvText.trim().split('\n').filter(row => row.trim());
-                    let latestAmount = 0;
-                    
-                    for (let i = rows.length - 1; i >= 0; i--) {
-                        const row = rows[i];
-                        const value = parseFloat(row.split(',')[0]);
-                        if (!isNaN(value)) {
-                            latestAmount = value;
-                            break;
-                        }
-                    }
+        <div class="card" style="margin-top:12px" id="gallery">
+          <h3>แกลเลอรี</h3>
+          <div class="gallery">
+            <img src="https://placehold.co/600x400?text=แกลเลอรี+1" alt="gallery1">
+            <img src="https://placehold.co/600x400?text=แกลเลอรี+2" alt="gallery2">
+            <img src="https://placehold.co/600x400?text=แกลเลอรี+3" alt="gallery3">
+            <img src="https://placehold.co/600x400?text=แกลเลอรี+4" alt="gallery4">
+            <img src="https://placehold.co/600x400?text=แกลเลอรี+5" alt="gallery5">
+            <img src="https://placehold.co/600x400?text=แกลเลอรี+6" alt="gallery6">
+          </div>
+        </div>
 
-                    updateChart(latestAmount);
+      </div>
 
-                } catch (error) {
-                    console.error('An error occurred while fetching data:', error);
-                    updateChart(0);
-                }
-            }
+      <aside>
+        <div class="card">
+          <h4>แผนที่</h4>
+          <div class="map">
+            <!-- แทนที่ iframe src ด้วยพิกัดจริงหรือลิงก์ Google Maps ของมัสยิด -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31617.123456789!2d101.0!3d6.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z4Liq4LiB4Lij4LmA4LiV4Lij4LmM!5e0!3m2!1sth!2sth!4v0000000000000" width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
 
-            // Start the application when the window loads
-            window.onload = function() {
-                setLanguage('th');
-                fetchSheet();
-                setInterval(updateClock, 1000);
-                setInterval(fetchSheet, 1000 * 10);
-            }
-        })();
-    </script>
-</body>
-</html>
+          <div style="margin-top:12px">
+            <h4>ติดต่อ</h4>
+            <div class="contact-list">
+              <div class="contact-item"><div style="font-weight:600">อีเมล</div><div><a href="mailto:info@masjid-example.org">info@masjid-example.org</a></div></div>
+              <div class="contact-item"><div style="font-weight:600">โทร</div><div><a href="tel:+66900000000">+66 90 000 0000</a></div></div>
+              <div class="contact-item"><div style="font-weight:600">ที่ตั้ง</div><div class="muted-small">ตำบลบาตง อำเภอรือเสาะ จังหวัดนราธิวาส</div></div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <a id="donate" class="btn primary" href="mailto:donate@masjid-example.org?subject=ขอบริจาค">บริจาคผ่านอีเมล</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h4>ผู้นำศาสนา</h4>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="width:64px;height:64px;background:#f1f1f1;border-radius:10px;display:flex;align-items:center;justify-content:center">รูป</div>
+            <div>
+              <div style="font-weight:700">อิหม่าม อับดุล</div>
+              <div class="muted-small">คำปรึกษาทางศาสนา
